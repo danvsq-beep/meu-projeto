@@ -10,32 +10,45 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 80px;
+            padding-top: 40px; /* Ajustado para celulares não cortarem o topo */
         }
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem; /* Tamanho perfeito para telas menores */
+            margin-bottom: 20px;
+            padding: 0 15px;
         }
         p {
-            font-size: 1.2rem;
-            color: #bbb;
-            margin-bottom: 30px;
-            max-width: 600px;
+            font-size: 1.1rem;
+            color: #ff4444; /* Cor vermelha para o resultado quando ele aparecer */
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            max-width: 90%; /* Força o texto longo a quebrar linha no celular */
             margin-left: auto;
             margin-right: auto;
-            padding: 0 20px;
+            padding: 0 15px;
+            word-wrap: break-word; /* Evita que o texto estique a tela para os lados */
+        }
+        .subtitulo {
+            font-size: 1rem;
+            color: #bbb;
+            font-weight: normal;
+            margin-bottom: 20px;
+            padding: 0 15px;
         }
         button {
             background-color: #00ff88;
             color: black;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 12px 24px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
             box-shadow: 0px 4px 15px rgba(0, 255, 136, 0.4);
             margin-top: 10px;
+            width: 80%; /* Botão no tamanho ideal para o dedo clicar no celular */
+            max-width: 400px;
         }
         button:hover {
             background-color: #00cc6e;
@@ -45,9 +58,12 @@
 <body>
 
     <h1>Tradutor do Solteiro Iludido 🤡</h1>
-    <p id="texto-status">Insira o sinal do crush abaixo para revelarmos a dolorosa verdade.</p>
+    <div class="subtitulo">Insira o sinal do crush abaixo para revelarmos a dolorosa verdade.</div>
     
     <button id="meuBotao">Traduzir Sinal</button>
+    
+    <!-- O parágrafo começa totalmente limpo e vazio, sem textos travados na inicialização -->
+    <p id="texto-status"></p>
 
     <script>
         const dicionarioDeSinais = [
@@ -113,10 +129,8 @@
                     }
 
                     const respostaFinal = traduzirSinalDoCrush(textoDigitado);
-
                     paragrafoResposta.innerText = respostaFinal;
                     paragrafoResposta.style.color = "#ff4444";
-                    paragrafoResposta.style.fontWeight = "bold";
                 });
             }
         });
