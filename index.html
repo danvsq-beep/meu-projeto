@@ -1,79 +1,126 @@
-// 1. O seu banco de dados de ilusões e realidades
-const dicionarioDeSinais = [
-    {
-        chaves: ["visualizou e nao respondeu", "visto por ultimo", "demora para responder", "sumiu"],
-        traducao: "Tradução: Você está na geladeira. Se a pessoa estivesse interessada, responderia antes do término do ano letivo. Aceita que dói menos."
-    },
-    {
-        chaves: ["curtiu foto antiga", "curtiu story antigo", "madrugada"],
-        traducao: "Tradução: Perigo! Isso não é um sinal de amor, é apenas insônia, tédio e falta do que fazer às 3h da manhã. Vá dormir."
-    },
-    {
-        chaves: ["falou do ex", "lembrei do ex", "meu ex"],
-        traducao: "Tradução: Alerta de terapia! Você é apenas o ouvido amigo ou o estepe emocional. Não monte o altar do casamento ainda."
-    },
-    {
-        chaves: ["so quer amizade", "como amigo", "gosto de voce mas"],
-        traducao: "Tradução: Game Over. A 'Friendzone' aqui é vitalícia. Nem o melhor algoritmo do mundo te tira dessa."
-    }
-];
-
-// 2. A função principal que faz a mágica acontecer
-function traduzirSinalDoCrush(textoDoUsuario) {
-    const textoFormatado = textoDoUsuario.toLowerCase();
-    for (let item of dicionarioDeSinais) {
-        for (let chave of item.chaves) {
-            if (textoFormatado.includes(chave)) {
-                return item.traducao;
-            }
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradutor do Solteiro Iludido</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
         }
-    }
-    return "Tradução Geral: Olha, pela complexidade da história, você já está criando fanfic na sua cabeça. O não você já tem, agora vá em busca da humilhação humilhante.";
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #bbb;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+        button {
+            background-color: #00ff88;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(0, 255, 136, 0.4);
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00cc6e;
+        }
+    </style>
+</head>
+<body>
 
-// --- CONEXÃO COM A TELA DO SOLTEIRO ILUDIDO ---
-document.addEventListener("DOMContentLoaded", () => {
-    const botao = document.getElementById("meuBotao");
-    const paragrafoResposta = document.getElementById("texto-status");
+    <h1>Tradutor do Solteiro Iludido 🤡</h1>
+    <p id="texto-status">Insira o sinal do crush abaixo para revelarmos a dolorosa verdade.</p>
+    
+    <button id="meuBotao">Traduzir Sinal</button>
 
-    if (botao) {
-        // Criar o campo de texto dinamicamente na tela
-        const inputNaTela = document.createElement("input");
-        inputNaTela.type = "text";
-        inputNaTela.placeholder = "Ex: Ele visualizou e nao respondeu...";
-        inputNaTela.style.padding = "12px";
-        inputNaTela.style.width = "80%";
-        inputNaTela.style.maxWidth = "400px";
-        inputNaTela.style.marginBottom = "20px";
-        inputNaTela.style.borderRadius = "8px";
-        inputNaTela.style.border = "1px solid #333";
-        inputNaTela.style.backgroundColor = "#222";
-        inputNaTela.style.color = "white";
-        inputNaTela.style.fontSize = "16px";
-        inputNaTela.style.textAlign = "center";
-
-        // Coloca a caixinha de texto logo acima do botão verde
-        botao.parentNode.insertBefore(inputNaTela, botao);
-        botao.parentNode.insertBefore(document.createElement("br"), botao);
-
-        // Evento ao clicar no botão verde "Traduzir Sinal"
-        botao.addEventListener("click", () => {
-            const textoDigitado = inputNaTela.value;
-
-            if (textoDigitado.trim() === "") {
-                paragrafoResposta.innerText = "Digita alguma coisa, não vem com sinal em branco! 🤡";
-                paragrafoResposta.style.color = "#ffcc00";
-                return;
+    <script>
+        const dicionarioDeSinais = [
+            {
+                chaves: ["visualizou e nao respondeu", "visto por ultimo", "demora para responder", "sumiu"],
+                traducao: "Tradução: Você está na geladeira. Se a pessoa estivesse interessada, responderia antes do término do ano letivo. Aceita que dói menos."
+            },
+            {
+                chaves: ["curtiu foto antiga", "curtiu story antigo", "madrugada"],
+                traducao: "Tradução: Perigo! Isso não é um sinal de amor, é apenas insônia, tédio e falta do que fazer às 3h da manhã. Vá dormir."
+            },
+            {
+                chaves: ["falou do ex", "lembrei do ex", "meu ex"],
+                traducao: "Tradução: Alerta de terapia! Você é apenas o ouvido amigo ou o estepe emocional. Não monte o altar do casamento ainda."
+            },
+            {
+                chaves: ["so quer amizade", "como amigo", "gosto de voce mas"],
+                traducao: "Tradução: Game Over. A 'Friendzone' aqui é vitalícia. Nem o melhor algoritmo do mundo te tira dessa."
             }
+        ];
 
-            // Pega o veredito do tradutor
-            const respostaFinal = traduzirSinalDoCrush(textoDigitado);
+        function traduzirSinalDoCrush(textoDoUsuario) {
+            const textoFormatado = textoDoUsuario.toLowerCase();
+            for (let item of dicionarioDeSinais) {
+                for (let chave of item.chaves) {
+                    if (textoFormatado.includes(chave)) {
+                        return item.traducao;
+                    }
+                }
+            }
+            return "Tradução Geral: Olha, pela complexidade da história, você já está criando fanfic na sua cabeça. O não você já tem, agora vá em busca da humilhação humilhante.";
+        }
 
-            // Mostra na tela
-            paragrafoResposta.innerText = respostaFinal;
-            paragrafoResposta.style.color = "#ff4444";
-            paragrafoResposta.style.fontWeight = "bold";
+        document.addEventListener("DOMContentLoaded", () => {
+            const botao = document.getElementById("meuBotao");
+            const paragrafoResposta = document.getElementById("texto-status");
+
+            if (botao) {
+                const inputNaTela = document.createElement("input");
+                inputNaTela.type = "text";
+                inputNaTela.placeholder = "Ex: Ele visualizou e nao respondeu...";
+                inputNaTela.style.padding = "12px";
+                inputNaTela.style.width = "80%";
+                inputNaTela.style.maxWidth = "400px";
+                inputNaTela.style.marginBottom = "20px";
+                inputNaTela.style.borderRadius = "8px";
+                inputNaTela.style.border = "1px solid #333";
+                inputNaTela.style.backgroundColor = "#222";
+                inputNaTela.style.color = "white";
+                inputNaTela.style.fontSize = "16px";
+                inputNaTela.style.textAlign = "center";
+
+                botao.parentNode.insertBefore(inputNaTela, botao);
+                botao.parentNode.insertBefore(document.createElement("br"), botao);
+
+                botao.addEventListener("click", () => {
+                    const textoDigitado = inputNaTela.value;
+
+                    if (textoDigitado.trim() === "") {
+                        paragrafoResposta.innerText = "Digita alguma coisa, não vem com sinal em branco! 🤡";
+                        paragrafoResposta.style.color = "#ffcc00";
+                        return;
+                    }
+
+                    const respostaFinal = traduzirSinalDoCrush(textoDigitado);
+
+                    paragrafoResposta.innerText = respostaFinal;
+                    paragrafoResposta.style.color = "#ff4444";
+                    paragrafoResposta.style.fontWeight = "bold";
+                });
+            }
         });
-    }
-});
-<script src="script.js"></script>
+    </script>
+
+</body>
+</html>
