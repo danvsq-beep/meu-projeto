@@ -1,0 +1,45 @@
+// 1. O seu banco de dados de ilusões e realidades
+const dicionarioDeSinais = [
+    {
+        chaves: ["visualizou e nao respondeu", "visto por ultimo", "demora para responder", "sumiu"],
+        traducao: "Tradução: Você está na geladeira. Se a pessoa estivesse interessada, responderia antes do término do ano letivo. Aceita que dói menos."
+    },
+    {
+        chaves: ["curtiu foto antiga", "curtiu story antigo", "madrugada"],
+        traducao: "Tradução: Perigo! Isso não é um sinal de amor, é apenas insônia, tédio e falta do que fazer às 3h da manhã. Vá dormir."
+    },
+    {
+        chaves: ["falou do ex", "lembrei do ex", "meu ex"],
+        traducao: "Tradução: Alerta de terapia! Você é apenas o ouvido amigo ou o estepe emocional. Não monte o altar do casamento ainda."
+    },
+    {
+        chaves: ["so quer amizade", "como amigo", "gosto de voce mas"],
+        traducao: "Tradução: Game Over. A 'Friendzone' aqui é vitalícia. Nem o melhor algoritmo do mundo te tira dessa."
+    }
+];
+
+// 2. A função principal que faz a mágica acontecer
+function traduzirSinalDoCrush(textoDoUsuario) {
+    // Transforma o texto em minúsculo para facilitar a busca
+    const textoFormatado = textoDoUsuario.toLowerCase();
+
+    // Procura por alguma palavra-chave no texto do usuário
+    for (let item of dicionarioDeSinais) {
+        for (let chave of item.chaves) {
+            if (textoFormatado.includes(chave)) {
+                return item.traducao; // Retorna a patada certa
+            }
+        }
+    }
+
+    // 3. Resposta padrão caso o usuário digite algo muito específico ou confuso
+    return "Tradução Geral: Olha, pela complexidade da história, você já está criando fanfic na sua cabeça. O não você já tem, agora vá em busca da humilhação humilhante.";
+}
+
+// --- EXEMPLO DE USO ---
+// O usuário digita no app: "Ele curtiu meu story antigo de biquíni"
+const inputUsuario = "Ele curtiu meu story antigo de biquíni";
+const resultado = traduzirSinalDoCrush(inputUsuario);
+
+console.log(resultado); 
+// Saída: "Tradução: Perigo! Isso não é um sinal de amor, é apenas insônia, tédio..."
